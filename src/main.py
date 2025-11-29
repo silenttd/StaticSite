@@ -1,7 +1,7 @@
 from textnode import TextNode, TextType
 from htmlnode import LeafNode
 from migrate_static import copy_directory
-from generate_page import generate_page, generate_pages_recursive
+
 import sys
 import os
 from markdown_to_html import markdown_to_html_node
@@ -59,8 +59,9 @@ def main():
                     print(f"Generated page: {html_path}")
             else:
                 # It's a directory - create it in dest if it doesn't exist
-                if not os.path.exists(dest_path):
-                    os.mkdir(dest_path)
+                dir_path = os.path.dirname(dest_path)
+                if dir_path:
+                    os.makedirs(dir_path, exist_ok=True)
                 
                 # Recursively process this directory
                 generate_pages_recursive(src_path, template_path, dest_path)
