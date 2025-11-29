@@ -1,6 +1,7 @@
 import os
 from markdown_to_html import markdown_to_html_node
 from pathlib import Path
+from main import basepath
 
 def extract_title(markdown):
     lines = markdown.split("\n")
@@ -22,7 +23,7 @@ def generate_page(from_path, template_path, dest_path):
     html = markdown_to_html_node(md_content).to_html()
     title = extract_title(md_content)
 
-    new_html = template_content.replace("{{ Title }}", title).replace("{{ Content }}", html)
+    new_html = template_content.replace("{{ Title }}", title).replace("{{ Content }}", html).replace('href="/', f'href="{basepath}').replace('src="/', f'src="{basepath}')
 
     dir_path = os.path.dirname(dest_path)
     if dir_path:
