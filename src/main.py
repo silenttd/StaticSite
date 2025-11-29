@@ -65,7 +65,9 @@ def main():
                 
                 # Recursively process this directory
                 generate_pages_recursive(src_path, template_path, dest_path)
-
+    source = "static"
+    destination = "docs"
+    copy_directory(source, destination)
 
     dir_path_content = "content"
     template_path = "template.html"
